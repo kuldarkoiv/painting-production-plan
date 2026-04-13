@@ -3,10 +3,10 @@ import psycopg2
 import re
 
 conn = psycopg2.connect(
-    host=os.environ.get('PG_HOST', 'db-postgresql-fra1-55444-do-user-13523372-0.b.db.ondigitalocean.com'),
-    port=int(os.environ.get('PG_PORT', 25060)),
-    user=os.environ.get('PG_USER', 'kuldar'),
-    password=os.environ.get('PG_PASSWORD', 'wk8A.b6jC6J'),
+    host=os.environ.get('PG_HOST', 'localhost'),
+    port=int(os.environ.get('PG_PORT', 5432)),
+    user=os.environ.get('PG_USER', 'user'),
+    password=os.environ.get('PG_PASSWORD', ''),
     dbname=os.environ.get('PG_DATABASE', 'defaultdb'),
     sslmode='require'
 )
