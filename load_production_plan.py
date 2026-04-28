@@ -18,7 +18,7 @@ SQL = """
 WITH ordered AS (
     SELECT
         a, tellija, haldur, masindamine_m, planeeritud_tootmisaeg_h,
-        pakkumise_lepingu_number, masin, __hevo_id,
+        lepingu_number, masin, __hevo_id,
         CASE
             WHEN tellija ~ '^Tootmise algus N[0-9]+'
             THEN regexp_replace(tellija, '^Tootmise algus (N[0-9]+).*', '\\1')
@@ -56,15 +56,15 @@ SELECT
     COALESCE(initcap(l.haldur), c.trader) AS trader,
     l.masindamine_m AS running_meters,
     l.planeeritud_tootmisaeg_h AS planned_production_time_h,
-    l.pakkumise_lepingu_number AS contract_number,
+    l.lepingu_number AS contract_number,
     l.masin AS equipment,
     l.week_label,
     l.resource
 FROM labeled l
 LEFT JOIN contracts c
-    ON ltrim(regexp_replace(l.pakkumise_lepingu_number, '\\s*\\([^)]*\\)\\s*$', ''), '0')
+    ON ltrim(regexp_replace(l.lepingu_number, '\\s*\\([^)]*\\)\\s*$', ''), '0')
        = c.contract_num
-WHERE l.pakkumise_lepingu_number IS NOT NULL
+WHERE l.lepingu_number IS NOT NULL
 ORDER BY l.__hevo_id;
 """
 
